@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import inventoryData from '../Data/inventoryData.json';
 import TransferToInventoryButton from './TransferToInventoryButton';
+import Button from 'react-bootstrap/Button';
 
 function Sales() {
   const [inventory, setInventory] = useState(inventoryData);
@@ -111,7 +112,7 @@ function Sales() {
               <td>{item.cost}</td>
               <td>{item.price}</td>
               <td>
-                <button onClick={() => handleSale(item)}>Продажа</button>
+                <Button variant="primary" size="sm" onClick={() => handleSale(item)}>Sell</Button>
               </td>
             </tr>
           ))}
@@ -132,6 +133,7 @@ function Sales() {
             <th>Amount</th>
             <th>Cost</th>
             <th>Price</th>
+            <th>Margin</th>
             <th>Sale Date</th>
             <th>Actions</th>
           </tr>
@@ -144,6 +146,7 @@ function Sales() {
               <td>{item.amount}</td>
               <td>{item.cost}</td>
               <td>{item.price}</td>
+              <td>{item.price - item.cost}</td>
               <td>{item.saleDate}</td>
               <td>
                 <TransferToInventoryButton item={item} onTransferToInventory={handleTransferToInventory} />

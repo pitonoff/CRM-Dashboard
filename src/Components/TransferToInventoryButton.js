@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 function TransferToInventoryButton({ item, onTransferToInventory }) {
   const handleTransferToInventory = () => {
@@ -6,7 +7,7 @@ function TransferToInventoryButton({ item, onTransferToInventory }) {
   };
 
   return (
-    <button onClick={handleTransferToInventory}>Возврат</button>
+    <Button variant="danger" size="sm" onClick={handleTransferToInventory}>Return to inventory</Button>
   );
 }
 

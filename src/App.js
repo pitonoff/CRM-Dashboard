@@ -1,5 +1,5 @@
-import Sales from './Components/Sales';
 import Header from './Components/Header';
+import Sales from './Components/Sales';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

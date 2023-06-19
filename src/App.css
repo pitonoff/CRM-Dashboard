@@ -1,9 +1,9 @@
 html {
-  background: rgb(51, 50, 50);
-  
+  background-color: rgb(51, 50, 50);
 }
 
 .colored  {
   background: rgb(51, 50, 50);
+  background-color: rgb(51, 50, 50);
   color: #fff
 }
