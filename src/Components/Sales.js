@@ -91,10 +91,10 @@ function Sales() {
     <div className='colored'>
       <Container fluid="md">
         <Row>
-          <Col></Col>
           <Col>
-            <h5>Inventory</h5>
+          <h3>Inventory:</h3>
           </Col>
+          <Col></Col>
           <Col></Col>
         </Row>
       </Container>
@@ -130,7 +130,7 @@ function Sales() {
         <Row>
           <Col></Col>
           <Col>
-            <h5>Sales</h5>
+            <h3>Sales:</h3>
           </Col>
           <Col>
             Cash: <h4>${cash}</h4>
@@ -144,7 +144,7 @@ function Sales() {
         <thead>
           <tr>
             <th>#</th>
-            <th>In Stock</th>
+            <th>Item</th>
             <th>Amount</th>
             <th>Cost</th>
             <th>Price</th>
