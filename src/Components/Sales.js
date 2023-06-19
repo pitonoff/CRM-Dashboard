@@ -11,6 +11,7 @@ function Sales() {
   const [inventory, setInventory] = useState(inventoryData);
   const [sales, setSales] = useState([]);
   const [cash, setCash] = useState(0);
+  const [margin, setMargin] = useState(0);
 
   const handleTransferToInventory = (item) => {
     setSales((prevSales) => {
@@ -22,7 +23,7 @@ function Sales() {
       }
       return prevSales;
     });
-
+  
     setInventory((prevInventory) => {
       const updatedInventory = prevInventory.inventory.map((i) => {
         if (i.itemName === item.itemName) {
@@ -33,17 +34,19 @@ function Sales() {
         }
         return i;
       });
-
+  
       return {
         ...prevInventory,
         inventory: updatedInventory
       };
     });
-
+  
     setCash((prevCash) => prevCash - item.price);
-
+    setMargin((prevMargin) => prevMargin - (item.price - item.cost));
+  
     console.log("Возвращено в Inventory:", item.itemName, "Количество:", 1);
   };
+  
 
   const handleSale = (item) => {
     const saleItem = {
@@ -74,6 +77,7 @@ function Sales() {
     });
 
     setCash((prevCash) => prevCash + item.price);
+    setMargin((prevMargin) => prevMargin + (item.price - item.cost));
 
     console.log("Продано:", item.itemName, "Количество:", 1);
   };
@@ -85,13 +89,15 @@ function Sales() {
 
   return (
     <div className='colored'>
-       <Container fluid="md" >
-      <Row>
-        <Col></Col>
-        <Col><h5>Inventory</h5></Col>
-        <Col></Col>
-      </Row>
-    </Container>
+      <Container fluid="md">
+        <Row>
+          <Col></Col>
+          <Col>
+            <h5>Inventory</h5>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -112,19 +118,28 @@ function Sales() {
               <td>{item.cost}</td>
               <td>{item.price}</td>
               <td>
-                <Button variant="primary" size="sm" onClick={() => handleSale(item)}>Sell</Button>
+                <Button variant="primary" size="sm" onClick={() => handleSale(item)}>
+                  Sell
+                </Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
       <Container fluid="md">
-      <Row>
-        <Col></Col>
-        <Col><h5>Sales</h5></Col>
-        <Col>Cash: <h4>${cash}</h4> </Col>
-      </Row>
-    </Container>
+        <Row>
+          <Col></Col>
+          <Col>
+            <h5>Sales</h5>
+          </Col>
+          <Col>
+            Cash: <h4>${cash}</h4>
+          </Col>
+          <Col>
+            Margin: <h4>${margin}</h4>
+          </Col>
+        </Row>
+      </Container>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -155,8 +170,6 @@ function Sales() {
           ))}
         </tbody>
       </Table>
-    
-    
     </div>
   );
 }

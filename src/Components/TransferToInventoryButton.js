@@ -1,14 +1,15 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+  import React from 'react';
+  import Button from 'react-bootstrap/Button';
 
-function TransferToInventoryButton({ item, onTransferToInventory }) {
-  const handleTransferToInventory = () => {
-    onTransferToInventory(item);
-  };
+  function TransferToInventoryButton({ item, onTransferToInventory }) {
+    const handleTransferToInventory = () => {
+      onTransferToInventory(item);
+    };
 
-  return (
-    <Button variant="danger" size="sm" onClick={handleTransferToInventory}>Return to inventory</Button>
-  );
-}
+    return (
+      <Button variant="danger" size="sm" onClick={handleTransferToInventory}>Return to inventory</Button>
+    );
+  }
 
-export default TransferToInventoryButton;
+  export default TransferToInventoryButton;
+  
