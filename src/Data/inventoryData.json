@@ -1,0 +1,31 @@
+{
+    "inventory": [
+      {
+        "itemName": "White Widow",
+        "amount": 10,
+        "cost": 50,
+        "price": 90
+      },
+      {
+        "itemName": "Purple Joe",
+        "amount": 5,
+        "cost": 30,
+        "price": 90
+      },
+      {
+        "itemName": "Jack Herrer",
+        "amount": 15,
+        "cost": 50,
+        "price": 90
+      },
+      {
+        "itemName": "Gelato",
+        "amount": 8,
+        "cost": 40,
+        "price": 90
+      }
+    ],
+    "sales": [],
+    "stoned": []
+  }
+  
