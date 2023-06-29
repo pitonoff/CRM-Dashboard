@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-function InventoryTable({ inventory, handleSale }) {
+function InventoryTable({ inventory, handleSale, handleStone }) {
   return (
     <Table striped bordered hover variant="dark">
       <thead>
@@ -26,6 +26,9 @@ function InventoryTable({ inventory, handleSale }) {
             <td>
               <Button variant="primary" size="sm" onClick={() => handleSale(item)}>
                 Sell
+              </Button>
+              <Button variant="danger" size="sm" onClick={() => handleStone(item)}>
+                Stone
               </Button>
             </td>
           </tr>

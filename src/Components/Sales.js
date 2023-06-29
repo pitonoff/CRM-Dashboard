@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import inventoryData from '../Data/inventoryData.json';
-import InventoryTable from './InventoryTable';
-import SalesTable from './SalesTable';
+import TransferToInventoryButton from './TransferToInventoryButton';
+import Button from 'react-bootstrap/Button';
 
 function Sales() {
   const [inventory, setInventory] = useState(inventoryData);
@@ -22,7 +23,7 @@ function Sales() {
       }
       return prevSales;
     });
-
+  
     setInventory((prevInventory) => {
       const updatedInventory = prevInventory.inventory.map((i) => {
         if (i.itemName === item.itemName) {
@@ -33,18 +34,19 @@ function Sales() {
         }
         return i;
       });
-
+  
       return {
         ...prevInventory,
         inventory: updatedInventory
       };
     });
-
+  
     setCash((prevCash) => prevCash - item.price);
     setMargin((prevMargin) => prevMargin - (item.price - item.cost));
-
+  
     console.log("Возвращено в Inventory:", item.itemName, "Количество:", 1);
   };
+  
 
   const handleSale = (item) => {
     const saleItem = {
@@ -90,13 +92,40 @@ function Sales() {
       <Container fluid="md">
         <Row>
           <Col>
-            <h3>Inventory:</h3>
+          <h3>Inventory:</h3>
           </Col>
           <Col></Col>
           <Col></Col>
         </Row>
       </Container>
-      <InventoryTable inventory={inventory.inventory} handleSale={handleSale} />
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>In Stock</th>
+            <th>Amount</th>
+            <th>Cost</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventory.inventory.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.itemName}</td>
+              <td>{item.amount}</td>
+              <td>{item.cost}</td>
+              <td>{item.price}</td>
+              <td>
+                <Button variant="primary" size="sm" onClick={() => handleSale(item)}>
+                  Sell
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
       <Container fluid="md">
         <Row>
           <Col></Col>
@@ -111,7 +140,36 @@ function Sales() {
           </Col>
         </Row>
       </Container>
-      <SalesTable sales={sales} handleTransferToInventory={handleTransferToInventory} />
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Cost</th>
+            <th>Price</th>
+            <th>Margin</th>
+            <th>Sale Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sales.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.itemName}</td>
+              <td>{item.amount}</td>
+              <td>{item.cost}</td>
+              <td>{item.price}</td>
+              <td>{item.price - item.cost}</td>
+              <td>{item.saleDate}</td>
+              <td>
+                <TransferToInventoryButton item={item} onTransferToInventory={handleTransferToInventory} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 }

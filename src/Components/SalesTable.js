@@ -1,8 +1,9 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import TransferToInventoryButton from './TransferToInventoryButton';
+import TransferToStonedButton from './TransferToStonedButton';
 
-function SalesTable({ sales, handleTransferToInventory }) {
+function SalesTable({ sales, handleTransferToInventory, stoned, handleTransferToStoned }) {
   return (
     <Table striped bordered hover variant="dark">
       <thead>
@@ -29,7 +30,14 @@ function SalesTable({ sales, handleTransferToInventory }) {
             <td>{item.saleDate}</td>
             <td>
               <TransferToInventoryButton item={item} onTransferToInventory={handleTransferToInventory} />
+              <TransferToStonedButton item={item} onTransferToStoned={handleTransferToStoned} />
             </td>
+            <SalesTable
+  sales={sales}
+  handleTransferToInventory={handleTransferToInventory}
+  stoned={stoned}
+  handleTransferToStoned={handleTransferToStoned}
+/>
           </tr>
         ))}
       </tbody>
